@@ -70,32 +70,3 @@ data.frame(date = index(RACE), coredata(RACE)) %>%
           open = ~RACE.Open, close = ~RACE.Close, 
           high = ~RACE.High, low = ~RACE.Low) %>%
   layout(title = "Candlestick Chart of RACE")
-
-####################################################################
-# White Noise Model
-# The arima function estimates are very close to the sample mean
-# and sample variance.
-####################################################################
-
-# Fit the white noise model to closing price using arima
-arima(close, order = (c(0, 0, 0)))
-
-# Sample mean
-mean(close)
-
-# sample variance
-var(close)
-
-####################################################################
-# Random Walk Model
-# 
-####################################################################
-
-# Difference close data
-close_diff <- diff(close)
-
-# Plot differenced close data
-ts.plot(close_diff)
-
-# Fit white noise model to the differenced close data
-model_wn <- arima(x = close_diff, order = c(0, 0, 0))
